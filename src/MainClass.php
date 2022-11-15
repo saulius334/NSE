@@ -4,26 +4,42 @@ declare(strict_types=1);
 
 namespace Nord;
 
-use Nord\Interfaces\MainClassInterface;
+use Nord\Models\User;
 use Nord\Services\InputHandler;
-use Nord\Services\OutputHandler;
-use Nord\Services\TaxCalculator;
+use Nord\Interfaces\MainClassInterface;
 
 class MainClass implements MainClassInterface
 {
+    private User $user;
     private InputHandler $inputHandler;
-    private OutputHandler $outputHandler;
-    private TaxCalculator $calculator;
+
     public function __construct()
     {
-        $this->inputHandler = new InputHandler();
-        $this->outputHandler = new OutputHandler();
-        $this->calculator = new TaxCalculator();
+        $this->user = new User();
+        $this->inputHandler = new InputHandler($this->user);
+        $this->printMenu();
     }
-    public function main(array $argv): void
+    public function main(int $input): void
     {
-        $input = $this->inputHandler->handle($argv);
-        $calculatedTax = $this->calculator->calculateTax($input);
-        $this->outputHandler->handle($calculatedTax); 
+        if ($input === 5) {
+            print_r("Goodbye!");
+            return;
+        }
+        $this->inputHandler->handle($input);
+        $this->printMenu();
+    }
+
+    private function printMenu(): void
+    {
+        $menu = [
+            1 => 'Input 1 to Enter Salary',
+            2 => 'Input 2 to Enter Additional Income',
+            3 => 'Input 3 to Enter Tax Exemption',
+            4 => 'Input 4 to Calculate Tax',
+            5 => 'Input 5 to Exit',
+        ];
+        echo 'Menu : ', implode(' | ', $menu), "\n";
+        $input = trim(fgets(STDIN, 1024));
+        $this->main((int)$input);
     }
 }

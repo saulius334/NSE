@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Nord\Services;
 
+use Nord\Models\User;
+
 class TaxCalculator
 {
-    public function calculateTax(array $input): float
+    public function calculateTax(User $user): float
     {
-        $totalIncome = $input['salary'] + $input['additionalIncome'] - $input['taxExemption'];
+        $totalIncome = $user->getSalary() + $user->getAdditionalIncome() - $user->getTaxExemption();
 
         if ($totalIncome < 30000) {
             $tax = $totalIncome * 0.20;
