@@ -13,7 +13,8 @@ class OutputHandler
             2 => "Additional Income is set!\n",
             3 => "Tax Exemption is set!\n",
             4 => "Your total tax is: $output \n",
-            5 => "GoodBye!\n"
+            5 => "GoodBye!\n",
+            default => ''
         };
         print_r($text);
     }

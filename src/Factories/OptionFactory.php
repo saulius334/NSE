@@ -20,6 +20,7 @@ class OptionFactory
             1 => self::OPTIONS[0],
             2 => self::OPTIONS[1],
             3 => self::OPTIONS[2],
+            default => 'Bad input, press return and try again'
         };
         print_r($text);
         $output = trim(fgets(STDIN, 1024));

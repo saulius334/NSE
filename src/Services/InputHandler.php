@@ -30,6 +30,7 @@ class InputHandler
                 1 => $this->user->setSalary($result),
                 2 => $this->user->setAdditionalIncome($result),
                 3 => $this->user->setTaxExemption($result),
+                default => 'Bad input, press return and try again'
             };
         }
         $this->outputHandler->handle($input, $output ?? 0);
