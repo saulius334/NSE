@@ -23,7 +23,7 @@ class OptionFactory
             default => 'Bad input, press return and try again'
         };
         print_r($text);
-        $output = trim(fgets(STDIN, 1024));
+        $output = fgets(STDIN, 1024);
         return (float)$output;
     }
 }

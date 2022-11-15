@@ -39,7 +39,7 @@ class MainClass implements MainClassInterface
             5 => 'Input 5 to Exit',
         ];
         echo 'Menu : ', implode(' | ', $menu), "\n";
-        $input = trim(fgets(STDIN, 1024));
+        $input = fgets(STDIN, 1024);
         $this->main((int)$input);
     }
 }
