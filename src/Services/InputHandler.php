@@ -27,10 +27,10 @@ class InputHandler
         } else {
             $result = $this->optionFactory->createOption($input);
             $output = match ($input) {
-            1 => $this->user->setSalary($result),
-            2 => $this->user->setAdditionalIncome($result),
-            3 => $this->user->setTaxExemption($result),
-        };
+                1 => $this->user->setSalary($result),
+                2 => $this->user->setAdditionalIncome($result),
+                3 => $this->user->setTaxExemption($result),
+            };
         }
         $this->outputHandler->handle($input, $output ?? 0);
     }
