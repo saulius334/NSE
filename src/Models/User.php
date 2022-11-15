@@ -19,26 +19,41 @@ class User
     {
         return $this->salary;
     }
-    public function setSalary(float|int $salary): void
+    public function setSalary(float|int $salary): string
     {
-        $this->salary = $salary;
+        if ($salary < 0) {
+            return 'Cannot set salary, given number is negative';
+        } else {
+            $this->salary = $salary;
+            return 'Salary is set';
+        }
     }
 
     public function getAdditionalIncome(): int|float
     {
         return $this->additionalIncome;
     }
-    public function setAdditionalIncome(float|int $additionalIncome): void
+    public function setAdditionalIncome(float|int $additionalIncome): string
     {
-        $this->additionalIncome = $additionalIncome;
+        if ($additionalIncome < 0) {
+            return 'Cannot set additional income, given number is negative';
+        } else {
+            $this->additionalIncome = $additionalIncome;
+            return 'Additional Income is set!';
+        }
     }
 
     public function getTaxExemption(): int|float
     {
         return $this->taxExemption;
     }
-    public function setTaxExemption(float|int $taxExemption): void
+    public function setTaxExemption(float|int $taxExemption): string
     {
-        $this->taxExemption = $taxExemption;
+        if ($taxExemption < 0) {
+            return 'Cannot set tax exemption, given number is negative';
+        } else {
+            $this->taxExemption = $taxExemption;
+            return 'Tax Exemption is set!';
+        }
     }
 }
