@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Nord;
 
+use Nord\Interfaces\MainClassInterface;
 use Nord\Services\InputHandler;
 use Nord\Services\OutputHandler;
 use Nord\Services\TaxCalculator;
 
-class MainClass
+class MainClass implements MainClassInterface
 {
     private InputHandler $inputHandler;
     private OutputHandler $outputHandler;
@@ -19,10 +20,9 @@ class MainClass
         $this->outputHandler = new OutputHandler();
         $this->calculator = new TaxCalculator();
     }
-    public function main(array $argv)
+    public function main(array $argv): void
     {
         $input = $this->inputHandler->handle($argv);
-        print_r($input);
         $calculatedTax = $this->calculator->calculateTax($input);
         $this->outputHandler->handle($calculatedTax); 
     }
