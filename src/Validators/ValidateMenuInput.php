@@ -6,10 +6,15 @@ namespace Nord\Validators;
 
 class ValidateMenuInput
 {
-    const OPTIONS = [1,2,3,4,5];
-    public function validate($input): bool
+    private const OPTIONS = ['1','2','3','4','5'];
+    public function validate(mixed $input): bool
     {
-        return in_array($input,self::OPTIONS);
+        if (in_array($input, self::OPTIONS)) {
+            return true;
+        } else {
+            print_r($this->getErrorMessage());
+            return false;
+        }
     }
     public function getErrorMessage(): string
     {

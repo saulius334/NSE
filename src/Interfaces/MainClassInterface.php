@@ -7,5 +7,5 @@ namespace Nord\Interfaces;
 interface MainClassInterface
 {
     public function __construct();
-    public function main(int $option): void;
+    public function main(string $option): void;
 }

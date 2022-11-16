@@ -6,12 +6,15 @@ namespace Nord\Services;
 
 use Nord\Models\User;
 use Nord\Factories\OptionFactory;
+use Nord\Factories\StrategyFactory;
+use Nord\Interfaces\StrategyInterface;
 
 class InputHandler
 {
     private OptionFactory $optionFactory;
     private TaxCalculator $calculator;
     private OutputHandler $outputHandler;
+    private StrategyFactory $strategyFactory;
 
     public function __construct(private User $user)
     {
@@ -19,20 +22,25 @@ class InputHandler
         $this->optionFactory = new OptionFactory();
         $this->calculator = new TaxCalculator();
         $this->outputHandler = new OutputHandler();
+        $this->strategyFactory = new StrategyFactory();
     }
-    public function handle(int $input): void
+    public function handle(string $input): void
     {
-        if ($input === 4) {
+        if ($input === '4') {
             $output = $this->calculator->calculateTax($this->user);
         } else {
-            $result = $this->optionFactory->createOption($input);
-            $output = match ($input) {
-                1 => $this->user->setSalary($result),
-                2 => $this->user->setAdditionalIncome($result),
-                3 => $this->user->setTaxExemption($result),
-                default => ''
-            };
+            $strategy = $this->setStrategy($input);
+            $option = $this->setOption($input);
+            $output = $strategy->doLogic($this->user, $option);
         }
-        $this->outputHandler->handle($input, $output);
+        $this->outputHandler->handle($output, $input);
+    }
+    private function setStrategy(string $input): StrategyInterface
+    {
+        return $this->strategyFactory->createStrategy($input);
+    }
+    private function setOption(string $input): string
+    {
+        return $this->optionFactory->createOption($input);
     }
 }
