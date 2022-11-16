@@ -6,20 +6,17 @@ namespace Nord\Models;
 
 class User
 {
-    private float|int $salary;
-    private float|int $additionalIncome;
-    private float|int $taxExemption;
+    private float|int $salary = 0;
+    private float|int $additionalIncome = 0;
+    private float|int $taxExemption = 0;
     public function __construct()
     {
-        $this->salary = 0;
-        $this->additionalIncome = 0;
-        $this->taxExemption = 0;
     }
-    public function getSalary(): int|float
+    public function getSalary(): float
     {
         return $this->salary;
     }
-    public function setSalary(float|int $salary): string
+    public function setSalary(float $salary): string
     {
         if ($salary < 0) {
             return 'Cannot set salary, given number is negative';
@@ -29,11 +26,11 @@ class User
         }
     }
 
-    public function getAdditionalIncome(): int|float
+    public function getAdditionalIncome(): float
     {
         return $this->additionalIncome;
     }
-    public function setAdditionalIncome(float|int $additionalIncome): string
+    public function setAdditionalIncome(float $additionalIncome): string
     {
         if ($additionalIncome < 0) {
             return 'Cannot set additional income, given number is negative';
@@ -43,11 +40,11 @@ class User
         }
     }
 
-    public function getTaxExemption(): int|float
+    public function getTaxExemption(): float
     {
         return $this->taxExemption;
     }
-    public function setTaxExemption(float|int $taxExemption): string
+    public function setTaxExemption(float $taxExemption): string
     {
         if ($taxExemption < 0) {
             return 'Cannot set tax exemption, given number is negative';
